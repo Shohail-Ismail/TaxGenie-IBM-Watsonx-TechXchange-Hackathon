@@ -2,7 +2,7 @@
 
    * [Background Information](#background-information)
    * [Core Features](#core-features)
-   * [Limitations](#testing-and-limitations)
+   * [Limitations and Future Developments](#limitations-and-future-developments)
    * [Environment Setup](#environment-setup)
 
 
