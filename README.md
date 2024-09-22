@@ -26,9 +26,10 @@ The main technologies used are APIs, which form skills in the wxO roadmap, with 
 
 6. **File submission**: NETFILE API is used to send these final forms to the CRA, as per their website on sending tax returns electronically. 
 
-### Intended wxO pipeline
 
-![Intended wxO pipeline](Project-documentation/Workflow.pdf)
+
+### [Intended wxO pipeline](Project-documentation/Workflow.pdf)
+
 
 
 ### Current watsonxOrchestrate skill tree
