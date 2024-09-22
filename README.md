@@ -3,6 +3,7 @@
    * [Background Information](#background-information)
    * [Core Features](#core-features)
    * [Limitations](#testing-and-limitations)
+   * [Environment Setup](#environment-setup)
 
 
 # Background Information
@@ -43,3 +44,15 @@ The main technologies used are APIs, which form skills in the wxO roadmap, with 
  * The process to transform a CSV to JSON file in step 1 is not automated, however this is something that is planned in future iterations.
  * The CRA API was not able to be debugged fully due to time constraints, but is planned to be improved in future iterations.
  * The Jira API was not able to be implemented due to time constraints, but is planned for future iterations.
+
+# Environment Setup
+
+Replace the following environment variables with your own credentials before using the API calls:
+
+```
+${APP_ID} = Custom application ID to allow API calls to be imported into wxO as a skill
+${IBM_API_KEY} = API key for IBM RPA API
+${PDFCO_API_KEY} = API key for PDF.co Document Parse and PDF Edit APIs
+${TEMPLATE_ID} = ID for Document Parser template used through PDF.co
+${FILE_TOKEN} = Token to retrieve and use file uploaded to PDF.co's cloud storage
+```
