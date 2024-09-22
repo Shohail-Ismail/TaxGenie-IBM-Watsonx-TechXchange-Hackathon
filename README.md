@@ -2,12 +2,13 @@
 
    * [Background Information](#background-information)
    * [Core Features](#core-features)
-   * [Limitations](#testing-and-limitations)
+   * [Limitations and Future Developments](#limitations-and-future-developments)
+   * [Environment Setup](#environment-setup)
 
 
 # Background Information
 
-TaxGenie is a tool developed for the IBM watsonx TechXchange hackathon, with the attached code being a prototype/proof of concept. It is an AI-powered assistant designed to streamline the year-end tax filing process for Canadian individuals and businesses. It simplifies tasks like tax form filling, error-checking and data validation through an automated workflow in IBM watsonx Orchestrate (wxO), utilising APIs for each step (or 'skill') in the pipeline.
+TaxGenie is a tool developed for the IBM watsonx TechXchange hackathon, with the attached code being a prototype/proof of concept. It is an AI-powered assistant designed to streamline the year-end tax filing process for Canadian individuals and businesses. It simplifies tasks like tax form filling, error-checking and data validation through an automated workflow in IBM watsonx Orchestrate (wxO), utilising APIs for each step (or 'skill') in the pipeline. For a more detailed explanation, see our [Hackathon Proposal](IBM_Hackathon_Proposal.pdf)
 
 
 # Core Features
@@ -24,7 +25,18 @@ The main technologies used are APIs, which form skills in the wxO roadmap, with 
 
 5. **Human error-checking**: IBM RPAs can be integrated with the Jira API to automate the error-checking process by creating RPA bots to log any issues detected by Watson Discovery in Jira. This allows for a human-in-the-loop AI system, thus minimising chance of errors in the final completed T1 form.
 
-6. **File submission**: NETFILE API is used to send these final forms to the CRA, as per their website on sending tax returns electronically.
+6. **File submission**: NETFILE API is used to send these final forms to the CRA, as per their website on sending tax returns electronically. 
+
+
+
+### [Intended wxO pipeline](Project-documentation/Workflow.pdf)
+
+
+
+### Current watsonxOrchestrate skill tree
+
+![Intended wxO pipeline](Project-documentation/wxO-published-skills.png)
+
 
 # Limitations and Future Developments
 
@@ -32,3 +44,15 @@ The main technologies used are APIs, which form skills in the wxO roadmap, with 
  * The process to transform a CSV to JSON file in step 1 is not automated, however this is something that is planned in future iterations.
  * The CRA API was not able to be debugged fully due to time constraints, but is planned to be improved in future iterations.
  * The Jira API was not able to be implemented due to time constraints, but is planned for future iterations.
+
+# Environment Setup
+
+Replace the following environment variables with your own credentials before using the API calls:
+
+```
+${APP_ID} = Custom application ID to allow API calls to be imported into wxO as a skill
+${IBM_API_KEY} = API key for IBM RPA API
+${PDFCO_API_KEY} = API key for PDF.co Document Parse and PDF Edit APIs
+${TEMPLATE_ID} = ID for Document Parser template used through PDF.co
+${FILE_TOKEN} = Token to retrieve and use file uploaded to PDF.co's cloud storage
+```
