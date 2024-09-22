@@ -1,0 +1,128 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "CRA Tax Data API",
+    "description": "API to retrieve Canadian tax-related datasets",
+    "version": "1.0.0",
+    "x-ibm-application-id": "${APP_ID}",
+    "x-ibm-application-name": "Generative AI Service",
+    "x-ibm-skill-type": "imported",
+    "x-ibm-skill-subtype": "public"
+  },
+  "servers": [
+    {
+      "url": "https://open.canada.ca/data/api"
+    }
+  ],
+  "paths": {
+    "/action/package_search": {
+      "get": {
+        "tags": [
+          "Tax Data"
+        ],
+        "summary": "Search tax-related datasets",
+        "description": "Retrieve tax-related datasets matching query terms",
+        "operationId": "getTaxDatasets",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Query parameter for searching datasets, e.g., 'tax'.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "tax"
+            }
+          },
+          {
+            "name": "rows",
+            "in": "query",
+            "description": "Number of rows to return.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": 10
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "The offset from the beginning of results (0) for pagination.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of tax-related datasets including all metadata available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Unique identifier for the dataset."
+                          },
+                          "title": {
+                            "type": "string",
+                            "description": "Title of the dataset."
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "Description of the dataset."
+                          },
+                          "url": {
+                            "type": "string",
+                            "description": "URL to access the dataset."
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Invalid input."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "none": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "none": {
+        "type": "http",
+        "scheme": "none"
+      }
+    }
+  }
+}

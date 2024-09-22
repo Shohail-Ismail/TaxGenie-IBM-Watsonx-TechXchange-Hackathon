@@ -1,0 +1,92 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "IBM RPA - HITL",
+    "description": "API for HITL setp",
+    "version": "1.0.0",
+    "x-ibm-application-id": "${IBM_API_KEY}",
+    "x-ibm-application-name": "Generative AI Service",
+    "x-ibm-skill-type": "imported",
+    "x-ibm-skill-subtype": "public"
+  },
+  "servers": [
+    {
+      "url": "https://rpa.ibm.com/api"
+    }
+  ],
+  "paths": {
+    "/tasks/assign": {
+      "post": {
+        "tags": [
+          "RPA",
+          "Human-in-the-Loop"
+        ],
+        "summary": "Assign a task to a human operator",
+        "description": "Creates a task that requires human decision-making in an automated process.",
+        "operationId": "assignHumanTask",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "taskName": {
+                    "type": "string",
+                    "description": "The name of the task to assign (probaly Human-Error-Check)."
+                  },
+                  "taskDetails": {
+                    "type": "string",
+                    "description": "Details about the task to be performed."
+                  }
+                },
+                "required": [
+                  "taskName",
+                  "taskDetails"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Task assignment successful.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "taskId": {
+                      "type": "string",
+                      "description": "Unique identifier for the assigned task."
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "Status of the task (e.g., 'Assigned', 'In Progress')."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input data.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Invalid input."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

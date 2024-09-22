@@ -1,0 +1,110 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "NETFILE API - Tax Submission",
+    "description": "API for submitting tax filings electronically via NETFILE.",
+    "version": "1.0.0",
+    "x-ibm-application-id": "${APP_ID}",
+    "x-ibm-application-name": "Generative AI Service",
+    "x-ibm-skill-type": "imported",
+    "x-ibm-skill-subtype": "public"
+  },
+  "servers": [
+    {
+      "url": "https://api.netfile.gc.ca"
+    }
+  ],
+  "paths": {
+    "/submitTaxReturn": {
+      "post": {
+        "tags": [
+          "Tax Submission"
+        ],
+        "summary": "Submit a tax return",
+        "description": "Submit a completed tax return electronically.",
+        "operationId": "submitTaxReturn",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "taxpayerId": {
+                    "type": "string",
+                    "description": "Unique identifier for the taxpayer."
+                  },
+                  "taxYear": {
+                    "type": "integer",
+                    "description": "Tax year of the return being submitted.",
+                    "example": 2023
+                  },
+                  "returnData": {
+                    "type": "string",
+                    "description": "Base64-encoded tax return data fiel."
+                  }
+                },
+                "required": [
+                  "taxpayerId",
+                  "taxYear",
+                  "returnData"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful tax return submission.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "submissionId": {
+                      "type": "string",
+                      "description": "Unique identifier for the submission."
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "Submission status (e.g., 'Submitted', 'Processed')."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input data.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Invalid input."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "none": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "none": {
+        "type": "http",
+        "scheme": "none"
+      }
+    }
+  }
+}

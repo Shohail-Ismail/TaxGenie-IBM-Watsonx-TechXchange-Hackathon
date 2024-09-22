@@ -1,0 +1,182 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Document Processing Skill",
+    "description": "API to extract data from a source document, output it as CSV, convert to JSON (manually), and fill the data into a target document.",
+    "version": "1.0.0",
+    "x-ibm-application-id": "${APP_ID}",
+    "x-ibm-application-name": "Generative AI Service",
+    "x-ibm-skill-type": "imported",
+    "x-ibm-skill-subtype": "public"
+  },
+  "servers": [
+    {
+      "url": "https://api.pdf.co/v1"
+    }
+  ],
+  "paths": {
+    "/pdf/documentparser": {
+      "post": {
+        "tags": [
+          "Document Processing"
+        ],
+        "summary": "Parse a document and output CSV data",
+        "description": "Parses a document using a custom template and outputs the extracted data in CSV format.",
+        "operationId": "parseDocumentAndOutputCSV",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "description": "Filetoken URL of the source document to be parsed.",
+                    "example": "${FILE_TOKEN}"
+                  },
+                  "templateId": {
+                    "type": "string",
+                    "description": "The name of the custom template used for parsing.",
+                    "example": "${TEMPLATE_ID}"
+                  },
+                  "outputFormat": {
+                    "type": "string",
+                    "description": "The desired output format (must be 'CSV').",
+                    "example": "CSV"
+                  }
+                },
+                "required": [
+                  "url",
+                  "template",
+                  "outputFormat"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Document parsed successfully and CSV output generated.",
+            "content": {
+              "application/csv": {
+                "schema": {
+                  "type": "string",
+                  "description": "CSV data extracted from the document."
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input or processing error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Invalid input or processing error."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/pdf/edit/add": {
+      "post": {
+        "tags": [
+          "Document Processing"
+        ],
+        "summary": "Fill a target document with JSON data",
+        "description": "Fills fields in a target document with values from the manually converted JSON data.",
+        "operationId": "fillDocumentWithJSONData",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "description": "URL of the target document to be filled.",
+                    "example": "https://pdf.co/saved-files/target-document.pdf"
+                  },
+                  "fields": {
+                    "type": "object",
+                    "description": "Key-value pairs representing the fields and their corresponding values from the manually converted JSON."
+                  }
+                },
+                "required": [
+                  "url",
+                  "fields"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Document filled successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "outputUrl": {
+                      "type": "string",
+                      "description": "URL of the filled target document."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input or processing error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Invalid input or processing error."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "${PDFCO_API_KEY}-api-key"
+      }
+    }
+  }
+}
