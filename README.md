@@ -7,7 +7,7 @@
 
 # Background Information
 
-TaxGenie is a tool developed for the IBM watsonx TechXchange hackathon, with the attached code being a prototype/proof of concept. It is an AI-powered assistant designed to streamline the year-end tax filing process for Canadian individuals and businesses. It simplifies tasks like tax form filling, error-checking and data validation through an automated workflow in IBM watsonx Orchestrate (wxO), utilising APIs for each step (or 'skill') in the pipeline.
+TaxGenie is a tool developed for the IBM watsonx TechXchange hackathon, with the attached code being a prototype/proof of concept. It is an AI-powered assistant designed to streamline the year-end tax filing process for Canadian individuals and businesses. It simplifies tasks like tax form filling, error-checking and data validation through an automated workflow in IBM watsonx Orchestrate (wxO), utilising APIs for each step (or 'skill') in the pipeline. For a more detailed explanation, see our [Hackathon Proposal](IBM_Hackathon_Proposal.pdf)
 
 
 # Core Features
@@ -24,7 +24,17 @@ The main technologies used are APIs, which form skills in the wxO roadmap, with 
 
 5. **Human error-checking**: IBM RPAs can be integrated with the Jira API to automate the error-checking process by creating RPA bots to log any issues detected by Watson Discovery in Jira. This allows for a human-in-the-loop AI system, thus minimising chance of errors in the final completed T1 form.
 
-6. **File submission**: NETFILE API is used to send these final forms to the CRA, as per their website on sending tax returns electronically.
+6. **File submission**: NETFILE API is used to send these final forms to the CRA, as per their website on sending tax returns electronically. 
+
+### Intended wxO pipeline
+
+![Intended wxO pipeline](Project-documentation/Workflow.pdf)
+
+
+### Current watsonxOrchestrate skill tree
+
+![Intended wxO pipeline](Project-documentation/wxO-published-skills.png)
+
 
 # Limitations and Future Developments
 
