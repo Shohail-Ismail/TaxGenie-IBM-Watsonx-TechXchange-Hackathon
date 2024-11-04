@@ -17,11 +17,11 @@ The main technologies used are APIs, which form skills in the wxO roadmap, with 
 
 1. **Document parsing and data extraction**: PDF.co's Document Parser API has been used to extract key-value pairs from a completed passed-in tax-related form (e.g., T4). This file is then outputted as a CSV, which will be transformed into a JSON.
 
-2. **Document filling**: PDF.co's PDF Edit API was then used to fill in an empty target dicument document (e.g., T1) by identifying keys and using the corresponding JSON data from Step 1. IBM's watsonx.ai is also used to parse the document and prompt the user for information on fields (if any) that do not have corresponding data to fill them.
+2. **Document filling**: PDF.co's PDF Edit API was then used to fill in an empty target document (e.g., T1) by identifying keys and using the corresponding JSON data from Step 1. IBM's watsonx.ai is also used to parse the document and prompt the user for information on fields (if any) that do not have corresponding data to fill them.
 
-3. **Searching tax-related datasets**: A Canadian Revenue Agency(CRA) certified API is used for this, namely the Open Government of Canada API for gathering information on tax-related legislation. This API will mainly serve as a dataset to be fed into the next step.
+3. **Searching tax-related datasets**: A Canadian Revenue Agency (CRA) certified API is used for this, namely the Open Government of Canada API for gathering information on tax-related legislation. This API will mainly serve as a dataset to be fed into the next step.
 
-4. **Tax policy retrieval**: This data is ingested into the IBM Watson Discovery API where the Granite LLM will be trained specifically on these datasets. Watson Discovery then cross-references the filled form against the latest regulations to check for accuracy and compliance. If discrepancies or missing fields are found, watsonx.ai prompts the user to correct or provide additional information, ensuring the form is complete and legislation-compliant.
+4. **Tax policy retrieval**: This data is ingested into the IBM Watson Discovery API where the Granite LLM will be trained specifically on these datasets, thereby utilisiing its RAG features. Watson Discovery then cross-references the filled form against the latest regulations to check for accuracy and compliance. If discrepancies or missing fields are found, watsonx.ai prompts the user to correct or provide additional information, ensuring the form is complete and legislation-compliant.
 
 5. **Human error-checking**: IBM RPAs can be integrated with the Jira API to automate the error-checking process by creating RPA bots to log any issues detected by Watson Discovery in Jira. This allows for a human-in-the-loop AI system, thus minimising chance of errors in the final completed T1 form.
 
